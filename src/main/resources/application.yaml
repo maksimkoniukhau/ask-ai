@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: ask-ai
+  ai:
+    vectorstore:
+      qdrant:
+        host: localhost
+        port: 6334
+        collection-name: ts_chunks
+        use-tls: false
+        initialize-schema: true
+    model:
+      embedding: ollama
+    ollama:
+      base-url: http://localhost:11434
+      embedding:
+        options:
+          model: phi3:latest
+      chat:
+        options:
+          model: gemma3:12b
