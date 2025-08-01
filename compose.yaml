@@ -1,9 +1,16 @@
 services:
   ollama:
-    image: 'ollama/ollama:latest'
+    image: ollama/ollama:latest
+    container_name: ollama
     ports:
-      - '11434'
+      - 11434:11434
   qdrant:
-    image: 'qdrant/qdrant:latest'
+    image: qdrant/qdrant:latest
+    container_name: qdrant
     ports:
-      - '6334'
+      - 6333:6333
+      - 6334:6334
+    expose:
+      - 6333
+      - 6334
+      - 6335
