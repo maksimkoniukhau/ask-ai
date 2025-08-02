@@ -6,7 +6,7 @@ spring:
       qdrant:
         host: localhost
         port: 6334
-        collection-name: ts_chunks
+        collection-name: repo_collection
         use-tls: false
         initialize-schema: true
     model:
