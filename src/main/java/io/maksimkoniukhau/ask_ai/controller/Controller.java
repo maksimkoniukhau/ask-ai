@@ -1,5 +1,6 @@
 package io.maksimkoniukhau.ask_ai.controller;
 
+import io.maksimkoniukhau.ask_ai.dto.EmbedContentRequest;
 import io.maksimkoniukhau.ask_ai.service.RepoReaderService;
 import lombok.AllArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.nio.file.Paths;
 import java.util.List;
 
 @AllArgsConstructor
@@ -24,14 +24,14 @@ public class Controller {
     private final VectorStore vectorStore;
     private final OllamaChatModel chatModel;
 
-    @PostMapping("/add-documents")
-    public void populateVectorStore(@RequestBody String path) {
-        List<String> chunks = repoReaderService.extractChunks(Paths.get(path));
+    @PostMapping("/embed-content")
+    public void populateVectorStore(@RequestBody EmbedContentRequest embedContentRequest) {
+        List<String> chunks = repoReaderService.extractChunks(embedContentRequest);
         vectorStore.add(chunks.stream().map(Document::new).toList());
     }
 
     @PostMapping("/ask")
-    public String ask(@RequestBody String question) {
+    public String askQuestion(@RequestBody String question) {
         PromptTemplate customPromptTemplate = PromptTemplate.builder()
                 .renderer(StTemplateRenderer.builder().startDelimiterToken('<').endDelimiterToken('>').build())
                 .template("""
