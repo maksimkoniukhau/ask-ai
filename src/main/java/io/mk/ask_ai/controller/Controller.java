@@ -25,8 +25,7 @@ public class Controller {
     private final OllamaChatModel chatModel;
 
     @PostMapping("/embed-content")
-    public void populateVectorStore(@RequestBody EmbedContentRequest embedContentRequest, String dsafdf,
-                                    Integer dsfdsgsdg, String trytery) {
+    public void populateVectorStore(@RequestBody EmbedContentRequest embedContentRequest) {
         List<String> chunks = repoReaderService.extractChunks(embedContentRequest);
         vectorStore.add(chunks.stream().map(Document::new).toList());
     }

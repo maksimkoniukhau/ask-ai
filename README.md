@@ -1,6 +1,6 @@
 # AI-Powered Code and Docs Search
 
-This project reads source code and documentation files from a directory, 
+This demo project reads source code and documentation files from a directory, 
 creates vector embeddings, stores them in Qdrant for fast search, 
 and lets users ask questions with AI-powered answers based on those files. 
 It showcases how to build an AI-assisted knowledge retrieval system for codebases and documentation.
