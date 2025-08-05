@@ -25,7 +25,8 @@ public class Controller {
     private final OllamaChatModel chatModel;
 
     @PostMapping("/embed-content")
-    public void populateVectorStore(@RequestBody EmbedContentRequest embedContentRequest) {
+    public void populateVectorStore(@RequestBody EmbedContentRequest embedContentRequest, String dsafdf,
+                                    Integer dsfdsgsdg, String trytery) {
         List<String> chunks = repoReaderService.extractChunks(embedContentRequest);
         vectorStore.add(chunks.stream().map(Document::new).toList());
     }
@@ -33,32 +34,32 @@ public class Controller {
     @PostMapping("/ask")
     public String askQuestion(@RequestBody String question) {
         PromptTemplate customPromptTemplate = PromptTemplate.builder()
-                .renderer(StTemplateRenderer.builder().startDelimiterToken('<').endDelimiterToken('>').build())
-                .template("""
-                        <query>
+            .renderer(StTemplateRenderer.builder().startDelimiterToken('<').endDelimiterToken('>').build())
+            .template("""
+                <query>
 
-                        Context information is below.
+                Context information is below.
 
-                        ---------------------
-                        <question_answer_context>
-                        ---------------------
+                ---------------------
+                <question_answer_context>
+                ---------------------
 
-                        Given the context information and no prior knowledge, answer the query.
+                Given the context information and no prior knowledge, answer the query.
 
-                        Follow these rules:
+                Follow these rules:
 
-                        1. If the answer is not in the context, just say that you don't know.
-                        2. Avoid statements like "Based on the context..." or "The provided information...".
-                        """)
-                .build();
+                1. If the answer is not in the context, just say that you don't know.
+                2. Avoid statements like "Based on the context..." or "The provided information...".
+                """)
+            .build();
 
         return ChatClient.builder(chatModel)
-                .build().prompt()
-                .advisors(QuestionAnswerAdvisor.builder(vectorStore)
-                        .promptTemplate(customPromptTemplate)
-                        .build())
-                .user(question)
-                .call()
-                .content();
+            .build().prompt()
+            .advisors(QuestionAnswerAdvisor.builder(vectorStore)
+                .promptTemplate(customPromptTemplate)
+                .build())
+            .user(question)
+            .call()
+            .content();
     }
 }
