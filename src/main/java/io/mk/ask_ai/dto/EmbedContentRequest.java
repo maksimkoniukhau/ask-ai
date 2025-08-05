@@ -1,4 +1,4 @@
-package io.maksimkoniukhau.ask_ai.dto;
+package io.mk.ask_ai.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;

@@ -1,7 +1,7 @@
-package io.maksimkoniukhau.ask_ai.controller;
+package io.mk.ask_ai.controller;
 
-import io.maksimkoniukhau.ask_ai.dto.EmbedContentRequest;
-import io.maksimkoniukhau.ask_ai.service.RepoReaderService;
+import io.mk.ask_ai.dto.EmbedContentRequest;
+import io.mk.ask_ai.service.RepoReaderService;
 import lombok.AllArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;

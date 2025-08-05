@@ -1,6 +1,6 @@
-package io.maksimkoniukhau.ask_ai.service;
+package io.mk.ask_ai.service;
 
-import io.maksimkoniukhau.ask_ai.dto.EmbedContentRequest;
+import io.mk.ask_ai.dto.EmbedContentRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 

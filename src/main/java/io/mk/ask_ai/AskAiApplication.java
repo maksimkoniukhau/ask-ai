@@ -1,4 +1,4 @@
-package io.maksimkoniukhau.ask_ai;
+package io.mk.ask_ai;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
