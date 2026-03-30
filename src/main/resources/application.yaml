@@ -18,4 +18,4 @@ spring:
           model: nomic-embed-text:latest
       chat:
         options:
-          model: gemma3:12b
+          model: mistral:7b
