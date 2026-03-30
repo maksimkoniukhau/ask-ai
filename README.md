@@ -1,15 +1,22 @@
-# AI-Powered Code and Docs Search
+# AI-Powered Code and Documentation Search
 
-This demo project reads source code and documentation files from a directory, 
-creates vector embeddings, stores them in Qdrant for fast search, 
-and lets users ask questions with AI-powered answers based on those files. 
-It showcases how to build an AI-assisted knowledge retrieval system for codebases and documentation.
+This demo project lets you search through source code and documentation files using AI. 
+It reads files from a directory, converts them into vector embeddings, stores them in Qdrant for fast similarity search, 
+and answers your questions based on the indexed content.
 
-### Running with local Ollama
+### Customize Docker data paths (optional)
 
-To run only the Qdrant container and use Ollama installed on your host machine:
+If you want to store Docker data in custom locations, create a `.env` file in the project root and add env variables (see compose.yaml):
 
-1. Start only Qdrant container:
+```
+echo -e "DOCKER_OLLAMA_DATA=/home/docker/ollama\nDOCKER_QDRANT_DATA=/home/docker/qdrant" > .env
+```
+
+### Option 1: Using local Ollama
+
+Use this if you already have Ollama installed and running on your machine.
+
+1. Start only Qdrant:
 ```
 docker compose up -d qdrant
 ```
@@ -19,27 +26,34 @@ docker compose up -d qdrant
 ./gradlew bootRun
 ```
 
-### Running with Ollama in docker
+### Option 2: Using Ollama in Docker
 
-To run both Qdrant and Ollama in containers:
+Use this if you want everything running in Docker.
 
 1. Start all services:
 ```
 docker compose up -d
 ```
 
-2. Run Spring Boot app with 'docker' profile
+2. Download AI models (choose any model you prefer. Remember to update model names in `application.yaml`):
+```
+docker exec -it ollama ollama pull nomic-embed-text:latest
+docker exec -it ollama ollama pull mistral:7b
+```
+
+3. Run Spring Boot app with 'docker' profile
 ```
 ./gradlew bootRun -Dspring.profiles.active=docker
 ```
 
 ### Using the API
 
-After running the project, open your browser and navigate to:
+Open your browser and go to:
 ```
 http://localhost:8080/swagger-ui/index.html#/
 ```
-Here you can:
 
-1. Use the /embed-content endpoint to populate the vector store (this needs to be done only once to index your files).
-2. Use the /ask endpoint to send questions and receive answers based on your indexed content.
+From there you can:
+
+1. Call `/embed-content` to populate the vector store (do this once to index your files).
+2. Call `/ask` to ask questions and get AI-powered answers based on your indexed content.
