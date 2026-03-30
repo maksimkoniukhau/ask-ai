@@ -12,11 +12,13 @@ public record EmbedContentRequest(
     )
     @NotEmpty
     String directoryPath,
+
     @Schema(
         description = "List of file extensions to include",
         example = "[\".ts\", \".tsx\", \".md\"]"
     )
     List<String> includedFileExtensions,
+
     @Schema(
         description = "List of directories to exclude",
         example = "[\"node_modules\", \"dist\", \"build\", \"coverage\", \"__tests__\"]"

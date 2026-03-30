@@ -5,7 +5,7 @@ services:
     ports:
       - 11435:11434
     volumes:
-      - ollama_data:/root/.ollama
+      - ${DOCKER_OLLAMA_DATA:-ollama_data}:/root/.ollama
   qdrant:
     image: qdrant/qdrant:latest
     container_name: qdrant
@@ -13,7 +13,7 @@ services:
       - 6333:6333
       - 6334:6334
     volumes:
-      - qdrant_data:/qdrant/storage
+      - ${DOCKER_QDRANT_DATA:-qdrant_data}:/qdrant/storage
 
 volumes:
   qdrant_data:
